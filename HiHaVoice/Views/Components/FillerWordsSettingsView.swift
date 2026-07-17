@@ -64,7 +64,7 @@ struct FillerWordsSettingsView: View {
                         Button(action: addWord) {
                             Image(systemName: "plus.circle.fill")
                                 .symbolRenderingMode(.hierarchical)
-                                .foregroundStyle(.blue)
+                                .foregroundStyle(Color.HiHa.accent)
                                 .font(.system(size: 16, weight: .semibold))
                         }
                         .buttonStyle(.borderless)

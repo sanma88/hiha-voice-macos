@@ -25,7 +25,7 @@ struct APIKeyManagementView: View {
                     }
                 }
                 .pickerStyle(.automatic)
-                .tint(.blue)
+                .tint(Color.HiHa.accent)
                 
                 if aiService.isAPIKeyValid && aiService.selectedProvider != .ollama {
                     Spacer()
@@ -289,7 +289,7 @@ struct APIKeyManagementView: View {
                                         Text("Obtenir une clé API")
                                     }
                                     .font(.caption)
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(Color.HiHa.accent)
                                     .padding(.vertical, 4)
                                     .padding(.horizontal, 8)
                                     .background(Color.HiHa.sovereignMarine.opacity(0.1))

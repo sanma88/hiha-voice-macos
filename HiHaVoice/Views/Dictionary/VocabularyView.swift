@@ -52,7 +52,7 @@ struct VocabularyView: View {
                         .fixedSize(horizontal: false, vertical: true)
                 } icon: {
                     Image(systemName: "info.circle.fill")
-                        .foregroundColor(.blue)
+                        .foregroundColor(Color.HiHa.accent)
                 }
             }
 
@@ -66,7 +66,7 @@ struct VocabularyView: View {
                     Button(action: addWords) {
                         Image(systemName: "plus.circle.fill")
                             .symbolRenderingMode(.hierarchical)
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(Color.HiHa.accent)
                             .font(.system(size: 16, weight: .semibold))
                     }
                     .buttonStyle(.borderless)

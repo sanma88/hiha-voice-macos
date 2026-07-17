@@ -125,7 +125,7 @@ struct SectionCard: View {
                 Image(systemName: section.icon)
                     .font(.system(size: 28))
                     .symbolRenderingMode(.hierarchical)
-                    .foregroundStyle(isSelected ? .blue : .secondary)
+                    .foregroundStyle(isSelected ? Color.HiHa.accent : .secondary)
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(section.rawValue)

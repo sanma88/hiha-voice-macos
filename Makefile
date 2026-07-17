@@ -191,27 +191,26 @@ uninstall:
 # ============================================================
 _export-options:
 	@mkdir -p "$(BUILD_DIR)"
-	@cat > "$(BUILD_DIR)/ExportOptions.plist" <<'EOF'
-	<?xml version="1.0" encoding="UTF-8"?>
-	<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-	<plist version="1.0">
-	<dict>
-	    <key>method</key>
-	    <string>developer-id</string>
-	    <key>teamID</key>
-	    <string>$(TEAM_ID)</string>
-	    <key>signingStyle</key>
-	    <string>manual</string>
-	    <key>signingCertificate</key>
-	    <string>Developer ID Application</string>
-	    <key>provisioningProfiles</key>
-	    <dict>
-	        <key>be.hiha.voice</key>
-	        <string>Hi-Ha Voice Developer ID</string>
-	    </dict>
-	</dict>
-	</plist>
-	EOF
+	@printf '%s\n' \
+		'<?xml version="1.0" encoding="UTF-8"?>' \
+		'<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">' \
+		'<plist version="1.0">' \
+		'<dict>' \
+		'    <key>method</key>' \
+		'    <string>developer-id</string>' \
+		'    <key>teamID</key>' \
+		'    <string>$(TEAM_ID)</string>' \
+		'    <key>signingStyle</key>' \
+		'    <string>manual</string>' \
+		'    <key>signingCertificate</key>' \
+		'    <string>Developer ID Application</string>' \
+		'    <key>provisioningProfiles</key>' \
+		'    <dict>' \
+		'        <key>be.hiha.voice</key>' \
+		'        <string>Hi-Ha Voice Developer ID</string>' \
+		'    </dict>' \
+		'</dict>' \
+		'</plist>' > "$(BUILD_DIR)/ExportOptions.plist"
 
 # ============================================================
 # Run / cleanup

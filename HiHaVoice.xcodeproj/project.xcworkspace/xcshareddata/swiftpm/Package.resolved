@@ -51,8 +51,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sanma88/LLMkit.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "91b228d3ff13febc6b61a58e5f3aa27e734d1c01"
+        "revision" : "f2fa23d81fd9fab2c33e79d30494d107ba442e73"
       }
     },
     {
@@ -60,7 +59,6 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sanma88/mediaremote-adapter.git",
       "state" : {
-        "branch" : "master",
         "revision" : "b97fa53f0654c8e33519e8a601b0bead3abd310a"
       }
     },

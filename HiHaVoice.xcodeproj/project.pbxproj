@@ -666,8 +666,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sanma88/LLMkit.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = revision;
+				revision = f2fa23d81fd9fab2c33e79d30494d107ba442e73;
 			};
 		};
 		E1A261102CC143AC00B233D1 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
@@ -698,8 +698,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sanma88/mediaremote-adapter.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = revision;
+				revision = b97fa53f0654c8e33519e8a601b0bead3abd310a;
 			};
 		};
 		E1ECEC142E44590200DFFBA8 /* XCRemoteSwiftPackageReference "Zip" */ = {

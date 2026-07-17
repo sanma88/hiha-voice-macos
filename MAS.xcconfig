@@ -1,0 +1,15 @@
+// MAS.xcconfig
+// Build configuration for Mac App Store distribution.
+// Used by `make mas` — creates an archive ready for App Store Connect upload.
+
+// App Store signing
+CODE_SIGN_IDENTITY = "Apple Distribution"
+CODE_SIGN_STYLE = Manual
+DEVELOPMENT_TEAM = 85RMV67598
+PROVISIONING_PROFILE_SPECIFIER = Hi-Ha Voice AppStore
+
+// Hardened runtime for MAS
+ENABLE_HARDENED_RUNTIME = YES
+
+// Entitlements for MAS (sandbox enabled)
+CODE_SIGN_ENTITLEMENTS = $(CURDIR)/HiHaVoice/HiHaVoice.entitlements

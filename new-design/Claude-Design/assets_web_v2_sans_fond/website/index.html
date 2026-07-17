@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hi-Ha.be · Icônes services premium</title>
+  <style>
+    :root {--bg:#f7f8fb;--card:rgba(255,255,255,.74);--stroke:rgba(40,55,90,.10);--text:#121827;--muted:#657083;--radius:28px;}
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--text); background:radial-gradient(circle at 20% 10%,rgba(255,190,125,.32),transparent 28rem),radial-gradient(circle at 80% 20%,rgba(125,170,255,.25),transparent 30rem),radial-gradient(circle at 55% 85%,rgba(230,120,255,.20),transparent 26rem),var(--bg); }
+    main { width:min(1180px,calc(100% - 32px)); margin:0 auto; padding:72px 0; }
+    header { margin-bottom:34px; }
+    h1 { margin:0 0 10px; font-size:clamp(2rem,5vw,4.5rem); letter-spacing:-.05em; line-height:.95; }
+    p { margin:0; color:var(--muted); font-size:1.05rem; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:22px; }
+    .icon-card { border:1px solid var(--stroke); background:var(--card); backdrop-filter:blur(18px); border-radius:var(--radius); padding:26px; box-shadow:0 24px 70px rgba(28,40,70,.10); }
+    .icon-card picture { display:grid; place-items:center; aspect-ratio:1; }
+    .icon-card img { width:min(100%,260px); height:auto; display:block; }
+    .icon-card h2 { margin:18px 0 6px; font-size:1.05rem; letter-spacing:-.02em; }
+    .icon-card code { color:var(--muted); font-size:.84rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Icônes services</h1>
+      <p>Version web optimisée avec fallback WebP → PNG.</p>
+    </header>
+    <section class="grid">
+      <article class="icon-card">
+        <picture>
+          <source srcset="assets/icons/roadmap-ia.webp" type="image/webp" />
+          <img src="assets/icons/roadmap-ia.png" alt="Roadmap IA" loading="lazy" width="512" height="512" />
+        </picture>
+        <h2>Roadmap IA</h2>
+        <code>roadmap-ia</code>
+      </article>
+      <article class="icon-card">
+        <picture>
+          <source srcset="assets/icons/comite-ia.webp" type="image/webp" />
+          <img src="assets/icons/comite-ia.png" alt="Comité IA" loading="lazy" width="512" height="512" />
+        </picture>
+        <h2>Comité IA</h2>
+        <code>comite-ia</code>
+      </article>
+      <article class="icon-card">
+        <picture>
+          <source srcset="assets/icons/agents-assistants.webp" type="image/webp" />
+          <img src="assets/icons/agents-assistants.png" alt="Agents & assistants" loading="lazy" width="512" height="512" />
+        </picture>
+        <h2>Agents & assistants</h2>
+        <code>agents-assistants</code>
+      </article>
+      <article class="icon-card">
+        <picture>
+          <source srcset="assets/icons/automatisation-n8n.webp" type="image/webp" />
+          <img src="assets/icons/automatisation-n8n.png" alt="Automatisation n8n" loading="lazy" width="512" height="512" />
+        </picture>
+        <h2>Automatisation n8n</h2>
+        <code>automatisation-n8n</code>
+      </article>
+      <article class="icon-card">
+        <picture>
+          <source srcset="assets/icons/ia-locale-souveraine.webp" type="image/webp" />
+          <img src="assets/icons/ia-locale-souveraine.png" alt="IA locale & souveraine" loading="lazy" width="512" height="512" />
+        </picture>
+        <h2>IA locale & souveraine</h2>
+        <code>ia-locale-souveraine</code>
+      </article>
+      <article class="icon-card">
+        <picture>
+          <source srcset="assets/icons/formations.webp" type="image/webp" />
+          <img src="assets/icons/formations.png" alt="Formations" loading="lazy" width="512" height="512" />
+        </picture>
+        <h2>Formations</h2>
+        <code>formations</code>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

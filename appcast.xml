@@ -1,0 +1,16 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>Hi-Ha Voice</title>
+        <description>Flux de mises à jour pour Hi-Ha Voice</description>
+        <language>fr</language>
+        <!--
+            Quand tu publies une nouvelle version :
+            1. Build + sign + notarize + staple + DMG
+            2. Upload le DMG sur hi-ha.be/voice/HiHaVoice-X.Y.dmg
+            3. Génère une signature Sparkle :
+                 ~/Library/Developer/Xcode/DerivedData/.../SourcePackages/artifacts/sparkle/Sparkle/bin/sign_update /path/to/HiHaVoice-X.Y.dmg
+            4. Ajoute un <item> en tête avec version + edSignature + length
+        -->
+    </channel>
+</rss>

@@ -1,0 +1,92 @@
+{
+  "brand": "hi-ha.be",
+  "fonts": {
+    "heading": {
+      "family": "Manrope",
+      "usage": "Titres, accroches, éléments de marque",
+      "weights": [
+        600,
+        700,
+        800
+      ],
+      "fallback": [
+        "Inter",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "Segoe UI",
+        "sans-serif"
+      ]
+    },
+    "body": {
+      "family": "Inter",
+      "usage": "Texte courant, UI, formulaires, navigation",
+      "weights": [
+        400,
+        500,
+        600,
+        700
+      ],
+      "fallback": [
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "Segoe UI",
+        "Roboto",
+        "Arial",
+        "sans-serif"
+      ]
+    },
+    "mono": {
+      "family": "IBM Plex Mono",
+      "usage": "Code, références techniques, labels système",
+      "weights": [
+        400,
+        500,
+        600
+      ],
+      "fallback": [
+        "SFMono-Regular",
+        "Consolas",
+        "Liberation Mono",
+        "monospace"
+      ]
+    }
+  },
+  "typeScale": {
+    "h1": {
+      "sizePx": 48,
+      "lineHeightPx": 56,
+      "weight": 700,
+      "letterSpacing": "-0.01em"
+    },
+    "h2": {
+      "sizePx": 36,
+      "lineHeightPx": 44,
+      "weight": 700,
+      "letterSpacing": "-0.01em"
+    },
+    "h3": {
+      "sizePx": 28,
+      "lineHeightPx": 36,
+      "weight": 600,
+      "letterSpacing": "-0.005em"
+    },
+    "h4": {
+      "sizePx": 22,
+      "lineHeightPx": 30,
+      "weight": 600,
+      "letterSpacing": "0"
+    },
+    "body": {
+      "sizePx": 16,
+      "lineHeightPx": 26,
+      "weight": 400,
+      "letterSpacing": "0"
+    },
+    "caption": {
+      "sizePx": 13,
+      "lineHeightPx": 18,
+      "weight": 400,
+      "letterSpacing": "0"
+    }
+  }
+}

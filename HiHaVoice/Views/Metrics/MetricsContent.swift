@@ -1,0 +1,342 @@
+import SwiftUI
+import SwiftData
+import os
+
+struct MetricsContent: View {
+    private let logger = Logger(subsystem: "be.hiha.voice", category: "MetricsContent")
+    let modelContext: ModelContext
+
+    @State private var totalCount: Int = 0
+    @State private var totalWords: Int = 0
+    @State private var totalDuration: TimeInterval = 0
+    @State private var isLoadingMetrics: Bool = true
+    @State private var metricsTask: Task<Void, Never>?
+
+    var body: some View {
+        Group {
+            if totalCount == 0 && !isLoadingMetrics {
+                emptyStateView
+            } else if isLoadingMetrics {
+                ProgressView("Chargement des statistiques…")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                GeometryReader { geometry in
+                    ScrollView {
+                        VStack(spacing: 24) {
+                            heroSection
+                            metricsSection
+
+                            Spacer(minLength: 20)
+
+                            HStack {
+                                Spacer()
+                                footerActionsView
+                            }
+                        }
+                        .frame(minHeight: geometry.size.height - 56)
+                        .padding(.vertical, 28)
+                        .padding(.horizontal, 32)
+                    }
+                    .background(Color(.windowBackgroundColor))
+                }
+            }
+        }
+        .task {
+            await loadMetricsEfficiently()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .transcriptionCreated)) { _ in
+            metricsTask?.cancel()
+            metricsTask = Task {
+                await loadMetricsEfficiently()
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .transcriptionCompleted)) { _ in
+            metricsTask?.cancel()
+            metricsTask = Task {
+                await loadMetricsEfficiently()
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .transcriptionDeleted)) { _ in
+            metricsTask?.cancel()
+            metricsTask = Task {
+                await loadMetricsEfficiently()
+            }
+        }
+        .onDisappear {
+            metricsTask?.cancel()
+        }
+    }
+    
+    private func loadMetricsEfficiently() async {
+        await MainActor.run {
+            self.isLoadingMetrics = true
+        }
+
+        let modelContainer = modelContext.container
+
+        let backgroundContext = ModelContext(modelContainer)
+
+        do {
+            guard !Task.isCancelled else {
+                await MainActor.run {
+                    self.isLoadingMetrics = false
+                }
+                return
+            }
+
+            let completedFilter = #Predicate<Transcription> { $0.transcriptionStatus == "completed" }
+            let count = try backgroundContext.fetchCount(FetchDescriptor<Transcription>(predicate: completedFilter))
+
+            guard !Task.isCancelled else {
+                await MainActor.run {
+                    self.isLoadingMetrics = false
+                }
+                return
+            }
+
+            var descriptor = FetchDescriptor<Transcription>(predicate: completedFilter)
+            descriptor.propertiesToFetch = [\.text, \.duration]
+
+            var words = 0
+            var duration: TimeInterval = 0
+
+            try backgroundContext.enumerate(descriptor) { transcription in
+                words += transcription.text.split(whereSeparator: \.isWhitespace).count
+                duration += transcription.duration
+            }
+
+            guard !Task.isCancelled else {
+                await MainActor.run {
+                    self.isLoadingMetrics = false
+                }
+                return
+            }
+
+            await MainActor.run {
+                self.totalCount = count
+                self.totalWords = words
+                self.totalDuration = duration
+                self.isLoadingMetrics = false
+            }
+        } catch {
+            logger.error("Error loading metrics: \(error.localizedDescription, privacy: .public)")
+            await MainActor.run {
+                self.isLoadingMetrics = false
+            }
+        }
+    }
+
+    private var emptyStateView: some View {
+        VStack(spacing: 20) {
+            Image(systemName: "waveform")
+                .font(.system(size: 56, weight: .semibold))
+                .foregroundColor(.secondary)
+            Text("Aucune transcription pour l'instant")
+                .font(.title3.weight(.semibold))
+            Text("Démarre ton premier enregistrement pour débloquer les statistiques.")
+                .foregroundColor(.secondary)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(.windowBackgroundColor))
+    }
+    
+    // MARK: - Sections
+    
+    private var heroSection: some View {
+        VStack(spacing: 14) {
+            (Text("Tu as économisé ")
+                .font(Font.HiHa.inter(24, weight: .bold))
+                .foregroundColor(Color.HiHa.foreground.opacity(0.75))
+             +
+             Text(formattedTimeSaved)
+                .font(Font.HiHa.inter(44, weight: .heavy))
+                .foregroundStyle(LinearGradient.hiHaBrandInk)
+             +
+             Text(" avec Hi-Ha Voice")
+                .font(Font.HiHa.inter(24, weight: .bold))
+                .foregroundColor(Color.HiHa.foreground.opacity(0.75))
+            )
+            .multilineTextAlignment(.center)
+            .lineLimit(nil)
+            .minimumScaleFactor(0.7)
+
+            Text(heroSubtitle)
+                .font(Font.HiHa.lead)
+                .foregroundStyle(Color.HiHa.mutedForeground)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: 560)
+        }
+        .padding(.vertical, 36)
+        .padding(.horizontal, 28)
+        .frame(maxWidth: .infinity)
+        .background(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .fill(Color.HiHa.cardBackground)
+        )
+        .hiHaAnimatedBorder(cornerRadius: 16, width: 1.5, duration: 10)
+        .hiHaShadowSoft()
+    }
+    
+    private var metricsSection: some View {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 240), spacing: 16)], spacing: 16) {
+            MetricCard(
+                icon: "waveform",
+                title: "Sessions enregistrées",
+                value: "\(totalCount)",
+                detail: "Sessions Hi-Ha Voice terminées",
+                color: Color.HiHa.electricViolet
+            )
+
+            MetricCard(
+                icon: "text.alignleft",
+                title: "Mots dictés",
+                value: Formatters.formattedNumber(totalWords),
+                detail: "mots générés",
+                color: Color.HiHa.sovereignMarine
+            )
+
+            MetricCard(
+                icon: "speedometer",
+                title: "Mots par minute",
+                value: averageWordsPerMinute > 0
+                    ? String(format: "%.1f", averageWordsPerMinute)
+                    : "–",
+                detail: "Hi-Ha Voice vs clavier",
+                color: Color.HiHa.auroraCyan
+            )
+
+            MetricCard(
+                icon: "keyboard.fill",
+                title: "Frappes économisées",
+                value: Formatters.formattedNumber(totalKeystrokesSaved),
+                detail: "moins de frappes clavier",
+                color: Color.HiHa.electricViolet
+            )
+        }
+    }
+    
+    private var footerActionsView: some View {
+        CopySystemInfoButton()
+    }
+    
+    private var formattedTimeSaved: String {
+        let formatted = Formatters.formattedDuration(timeSaved, style: .full, fallback: "Gain de temps bientôt disponible")
+        return formatted
+    }
+    
+    private var heroSubtitle: String {
+        guard totalCount > 0 else {
+            return "Ton aventure Hi-Ha Voice commence avec ton premier enregistrement."
+        }
+
+        let wordsText = Formatters.formattedNumber(totalWords)
+        let sessionText = totalCount == 1 ? "session" : "sessions"
+
+        return "\(wordsText) mots dictés sur \(totalCount) \(sessionText)."
+    }
+    
+    private var heroGradient: LinearGradient {
+        LinearGradient(
+            gradient: Gradient(colors: [
+                Color.HiHa.sovereignMarine,
+                Color.HiHa.sovereignMarine.opacity(0.85),
+                Color.HiHa.sovereignMarine.opacity(0.7)
+            ]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+    
+    // MARK: - Computed Metrics
+
+    private var estimatedTypingTime: TimeInterval {
+        let averageTypingSpeed: Double = 35 // words per minute
+        let estimatedTypingTimeInMinutes = Double(totalWords) / averageTypingSpeed
+        return estimatedTypingTimeInMinutes * 60
+    }
+
+    private var timeSaved: TimeInterval {
+        max(estimatedTypingTime - totalDuration, 0)
+    }
+
+    private var averageWordsPerMinute: Double {
+        guard totalDuration > 0 else { return 0 }
+        return Double(totalWords) / (totalDuration / 60.0)
+    }
+
+    private var totalKeystrokesSaved: Int {
+        Int(Double(totalWords) * 5.0)
+    }
+    
+    private var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
+    }
+}
+
+private enum Formatters {
+    static let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+    
+    static let durationFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.maximumUnitCount = 2
+        return formatter
+    }()
+    
+    static func formattedNumber(_ value: Int) -> String {
+        return numberFormatter.string(from: NSNumber(value: value)) ?? "\(value)"
+    }
+    
+    static func formattedDuration(_ interval: TimeInterval, style: DateComponentsFormatter.UnitsStyle, fallback: String = "–") -> String {
+        guard interval > 0 else { return fallback }
+        durationFormatter.unitsStyle = style
+        durationFormatter.allowedUnits = interval >= 3600 ? [.hour, .minute] : [.minute, .second]
+        return durationFormatter.string(from: interval) ?? fallback
+    }
+}
+
+private struct CopySystemInfoButton: View {
+    @State private var isCopied: Bool = false
+
+    var body: some View {
+        Button(action: {
+            copySystemInfo()
+        }) {
+            HStack(spacing: 8) {
+                Image(systemName: isCopied ? "checkmark" : "doc.on.doc")
+                    .rotationEffect(.degrees(isCopied ? 360 : 0))
+                    .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isCopied)
+
+                Text(isCopied ? "Copié !" : "Copier les infos système")
+                    .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isCopied)
+            }
+            .font(.system(size: 13, weight: .medium))
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .background(Capsule().fill(.thinMaterial))
+        }
+        .buttonStyle(.plain)
+        .scaleEffect(isCopied ? 1.1 : 1.0)
+        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isCopied)
+    }
+
+    private func copySystemInfo() {
+        SystemInfoService.shared.copySystemInfoToClipboard()
+
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+            isCopied = true
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                isCopied = false
+            }
+        }
+    }
+}

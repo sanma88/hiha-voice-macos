@@ -1,0 +1,209 @@
+/* ============================================================
+   hi-ha.be — Design Tokens
+   Couleurs, typographie, espacement, rayons, ombres.
+   Light par défaut ; [data-theme="dark"] pour le mode sombre.
+   Fonts : Manrope (titres), Inter (corps), IBM Plex Mono (UI/code)
+   chargées depuis Google Fonts (voir fonts.css).
+   ============================================================ */
+
+:root {
+  /* ---- Palette brute (ne pas utiliser directement en UI) ---- */
+  --c-blanc-glace:     #F4F7FB; /* neutre base */
+  --c-perle-givree:    #DFE1E9; /* neutre 2 */
+  --c-graphite:        #41454D; /* gris structurant */
+  --c-graphite-profond:#363B41; /* gris structurant profond */
+
+  --c-peche-douce:     #ECDAD3; /* accent iridescent */
+  --c-rose-brume:      #E2D0D4; /* accent iridescent */
+  --c-lilas-froid:     #DAD9EE; /* accent iridescent */
+
+  --c-noir-nuance:     #0B0B0C; /* fond dark recommandé */
+  --c-nuit-graphite:   #16181D; /* surface dark */
+  --c-gris-interface:  #22262D; /* surface dark 2 */
+  --c-brume-claire:    #E7EAF0; /* texte dark */
+
+  --c-white:           #FFFFFF;
+
+  /* ---- Accents iridescents : teintes plus saturées pour traits/halos ---- */
+  --accent-peach-ink:  #C98E76; /* dérivé lisible de Pêche douce (sur fond clair) */
+  --accent-rose-ink:   #BE8791; /* dérivé lisible de Rose brume */
+  --accent-lilas-ink:  #7E7BC4; /* dérivé lisible de Lilas froid */
+
+  /* Dégradé iridescent signature (halos, surlignages, surfaces hero) */
+  --iridescent: linear-gradient(120deg, var(--c-peche-douce) 0%, var(--c-rose-brume) 50%, var(--c-lilas-froid) 100%);
+  --iridescent-soft: linear-gradient(120deg, #F6ECE6 0%, #F2E6E9 50%, #ECEBF7 100%);
+}
+
+/* ============================================================
+   THÈME CLAIR (défaut)
+   60% neutres / 30% gris / 10% accents
+   ============================================================ */
+:root, [data-theme="light"] {
+  color-scheme: light;
+
+  /* Fonds & surfaces */
+  --bg:            #F4F7FB; /* Blanc Glacé — fond de page */
+  --bg-subtle:     #EDF0F6; /* fond légèrement creusé */
+  --surface:       #FFFFFF; /* cartes, panneaux */
+  --surface-2:     #F7F9FC; /* surface secondaire */
+  --surface-sunken:#E9ECF3; /* champs, zones enfoncées */
+  --surface-glass: rgba(255, 255, 255, 0.62); /* verre givré */
+
+  /* Texte */
+  --fg:        #2C2F36; /* texte principal (≈ graphite renforcé, AAA sur Blanc Glacé) */
+  --fg-2:      #41454D; /* Graphite — texte courant */
+  --fg-3:      #6B7079; /* texte secondaire / légendes */
+  --fg-muted:  #969BA5; /* placeholders, désactivé */
+  --fg-on-accent: #2C2F36; /* texte sur surface accent pastel */
+  --fg-inverse:#F4F7FB; /* texte sur fond sombre */
+
+  /* Bordures & séparateurs */
+  --border:        #DFE1E9; /* Perle Givrée */
+  --border-strong: #CDD1DB;
+  --border-subtle: #E9ECF2;
+
+  /* Accents iridescents (souligner uniquement) */
+  --accent-peach:  #ECDAD3;
+  --accent-rose:   #E2D0D4;
+  --accent-lilas:  #DAD9EE;
+  --accent-ink:    #7E7BC4; /* couleur d'accent "active" lisible (lilas froid foncé) */
+  --accent-ink-2:  #6A67B8;
+
+  /* États interactifs */
+  --link:        #5B58A6;
+  --focus-ring:  rgba(126, 123, 196, 0.55);
+  --hover-overlay: rgba(54, 59, 65, 0.04);
+  --press-overlay: rgba(54, 59, 65, 0.08);
+
+  /* Halo iridescent décoratif */
+  --halo: radial-gradient(60% 60% at 30% 25%, rgba(236,218,211,0.55), transparent 70%),
+          radial-gradient(55% 55% at 75% 70%, rgba(218,217,238,0.55), transparent 72%);
+}
+
+/* ============================================================
+   THÈME SOMBRE
+   ============================================================ */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg:            #0B0B0C; /* Noir nuancé */
+  --bg-subtle:     #101114;
+  --surface:       #16181D; /* Nuit graphite */
+  --surface-2:     #1B1E24;
+  --surface-sunken:#101216;
+  --surface-glass: rgba(34, 38, 45, 0.55);
+
+  --fg:        #E7EAF0; /* Brume claire */
+  --fg-2:      #C7CBD4;
+  --fg-3:      #9CA1AC;
+  --fg-muted:  #6C7079;
+  --fg-on-accent: #16181D;
+  --fg-inverse:#16181D;
+
+  --border:        #2A2E36;
+  --border-strong: #3A3F49;
+  --border-subtle: #20242B;
+
+  --accent-peach:  #ECDAD3;
+  --accent-rose:   #E2D0D4;
+  --accent-lilas:  #DAD9EE;
+  --accent-ink:    #B9B7E6; /* lilas clair lisible sur fond sombre */
+  --accent-ink-2:  #CFC9F0;
+
+  --link:        #BDB9EE;
+  --focus-ring:  rgba(185, 183, 230, 0.55);
+  --hover-overlay: rgba(231, 234, 240, 0.05);
+  --press-overlay: rgba(231, 234, 240, 0.10);
+
+  --halo: radial-gradient(60% 60% at 28% 22%, rgba(236,218,211,0.16), transparent 70%),
+          radial-gradient(55% 55% at 78% 72%, rgba(218,217,238,0.18), transparent 72%);
+}
+
+/* ============================================================
+   TYPOGRAPHIE
+   ============================================================ */
+:root {
+  --font-display: "Manrope", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-mono:    "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  /* Alias officiels (fonts/font-tokens.json) */
+  --font-brand-heading: var(--font-display);
+  --font-brand-body:    var(--font-body);
+  --font-brand-mono:    var(--font-mono);
+  --fw-extrabold: 800;
+
+  /* Échelle (px → rem @16) — taille / interligne / espacement */
+  /* Letter-spacing officiel (font-tokens.json) : H1/H2 -0.01em, H3 -0.005em, H4 0 */
+  --h1-size: 3rem;     --h1-lh: 3.5rem;    --h1-ls: -0.01em;  /* 48 / 56 */
+  --h2-size: 2.25rem;  --h2-lh: 2.75rem;   --h2-ls: -0.01em;  /* 36 / 44 */
+  --h3-size: 1.75rem;  --h3-lh: 2.25rem;   --h3-ls: -0.005em; /* 28 / 36 */
+  --h4-size: 1.375rem; --h4-lh: 1.875rem;  --h4-ls: 0;        /* 22 / 30 */
+  --h5-size: 1.125rem; --h5-lh: 1.625rem;  --h5-ls: 0;        /* 18 / 26 */
+  --h6-size: 1rem;     --h6-lh: 1.375rem;  --h6-ls: 0;        /* 16 / 22 */
+  --body-size: 1rem;   --body-lh: 1.625rem;                   /* 16 / 26 */
+  --small-size: 0.875rem; --small-lh: 1.25rem;                /* 14 / 20 */
+  --caption-size: 0.8125rem; --caption-lh: 1.125rem;          /* 13 / 18 */
+
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semibold:600;
+  --fw-bold:    700;
+
+  /* ---- Espacement (base 8) ---- */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-10: 80px;
+  --space-12: 96px;
+  --space-16: 128px;
+
+  /* ---- Rayons (coins arrondis modérés) ---- */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  /* ---- Ombres très douces + halos légers ---- */
+  --shadow-xs: 0 1px 2px rgba(20, 24, 33, 0.04);
+  --shadow-sm: 0 2px 8px rgba(20, 24, 33, 0.05), 0 1px 2px rgba(20, 24, 33, 0.04);
+  --shadow-md: 0 8px 24px rgba(20, 24, 33, 0.07), 0 2px 6px rgba(20, 24, 33, 0.04);
+  --shadow-lg: 0 18px 48px rgba(20, 24, 33, 0.10), 0 4px 12px rgba(20, 24, 33, 0.05);
+  --shadow-glow: 0 0 0 1px rgba(218,217,238,0.5), 0 12px 40px rgba(126,123,196,0.12);
+
+  /* ---- Mouvement ---- */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.45, 0.05, 0.35, 1);
+  --dur-fast: 180ms;
+  --dur: 320ms;
+  --dur-slow: 400ms;
+  --blur-glass: 18px;
+}
+
+[data-theme="dark"] {
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.45), 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.5), 0 2px 6px rgba(0,0,0,0.4);
+  --shadow-lg: 0 18px 48px rgba(0,0,0,0.6), 0 4px 12px rgba(0,0,0,0.45);
+  --shadow-glow: 0 0 0 1px rgba(185,183,230,0.25), 0 12px 40px rgba(126,123,196,0.22);
+}
+
+/* ============================================================
+   CLASSES SÉMANTIQUES (optionnelles, prêtes à l'emploi)
+   ============================================================ */
+.ds-h1 { font-family: var(--font-display); font-weight: var(--fw-bold);     font-size: var(--h1-size); line-height: var(--h1-lh); letter-spacing: var(--h1-ls); color: var(--fg); }
+.ds-h2 { font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--h2-size); line-height: var(--h2-lh); letter-spacing: var(--h2-ls); color: var(--fg); }
+.ds-h3 { font-family: var(--font-display); font-weight: var(--fw-semibold); font-size: var(--h3-size); line-height: var(--h3-lh); letter-spacing: var(--h3-ls); color: var(--fg); }
+.ds-h4 { font-family: var(--font-display); font-weight: var(--fw-semibold); font-size: var(--h4-size); line-height: var(--h4-lh); letter-spacing: var(--h4-ls); color: var(--fg); }
+.ds-h5 { font-family: var(--font-display); font-weight: var(--fw-semibold); font-size: var(--h5-size); line-height: var(--h5-lh); color: var(--fg); }
+.ds-h6 { font-family: var(--font-display); font-weight: var(--fw-semibold); font-size: var(--h6-size); line-height: var(--h6-lh); color: var(--fg); }
+.ds-body  { font-family: var(--font-body); font-weight: var(--fw-regular); font-size: var(--body-size); line-height: var(--body-lh); color: var(--fg-2); }
+.ds-small { font-family: var(--font-body); font-size: var(--small-size); line-height: var(--small-lh); color: var(--fg-3); }
+.ds-caption { font-family: var(--font-body); font-size: var(--caption-size); line-height: var(--caption-lh); color: var(--fg-3); }
+.ds-mono  { font-family: var(--font-mono); font-size: var(--small-size); letter-spacing: 0; color: var(--fg-3); }
+.ds-overline { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-ink); }

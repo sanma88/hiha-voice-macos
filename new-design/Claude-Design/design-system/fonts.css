@@ -1,0 +1,12 @@
+/* hi-ha.be — chargement des fontes de marque (Google Fonts)
+   Manrope (titres) · Inter (corps/UI) · IBM Plex Mono (UI/code)
+   Graisses officielles : Manrope 600/700/800 · Inter 400/500/600/700 · IBM Plex Mono 400/500/600
+
+   IMPORTANT — pour éviter tout rendu en police de substitution :
+   préférez les balises <link> avec preconnect dans le <head> (voir
+   fonts/hi-ha-fonts-head-snippet.html), plus rapides que cet @import.
+   Cet @import reste un fallback pratique pour les fichiers isolés.
+
+   Pour un site public (RGPD / performance), self-hostez les .woff2
+   récupérés depuis les sources officielles. */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');

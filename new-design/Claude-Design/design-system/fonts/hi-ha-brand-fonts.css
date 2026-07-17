@@ -1,0 +1,78 @@
+/* hi-ha.be — Brand Fonts
+   Fonts:
+   - Manrope: headings / brand titles
+   - Inter: body / UI
+   - IBM Plex Mono: code / technical labels
+
+   This file imports fonts from Google Fonts.
+   For strict GDPR/privacy/self-hosting requirements, ask the web designer to self-host the WOFF2 files
+   obtained from official font sources. Font files are intentionally not bundled here.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --font-brand-heading: "Manrope", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-brand-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-brand-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  --brand-letter-spacing-tight: -0.01em;
+  --brand-letter-spacing-normal: 0;
+}
+
+html {
+  font-family: var(--font-brand-body);
+  font-weight: var(--font-weight-regular);
+  font-feature-settings: "kern";
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-brand-body);
+}
+
+h1, h2, h3, h4, h5, h6,
+.brand-heading {
+  font-family: var(--font-brand-heading);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--brand-letter-spacing-tight);
+}
+
+.brand-title {
+  font-family: var(--font-brand-heading);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: -0.015em;
+}
+
+.brand-body {
+  font-family: var(--font-brand-body);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--brand-letter-spacing-normal);
+}
+
+.brand-ui {
+  font-family: var(--font-brand-body);
+  font-weight: var(--font-weight-medium);
+}
+
+.brand-mono,
+code,
+pre,
+kbd {
+  font-family: var(--font-brand-mono);
+}
+
+/* Suggested type scale */
+.hiha-h1 { font-family: var(--font-brand-heading); font-size: 48px; line-height: 56px; font-weight: 700; letter-spacing: -0.01em; }
+.hiha-h2 { font-family: var(--font-brand-heading); font-size: 36px; line-height: 44px; font-weight: 700; letter-spacing: -0.01em; }
+.hiha-h3 { font-family: var(--font-brand-heading); font-size: 28px; line-height: 36px; font-weight: 600; letter-spacing: -0.005em; }
+.hiha-h4 { font-family: var(--font-brand-heading); font-size: 22px; line-height: 30px; font-weight: 600; }
+.hiha-body { font-family: var(--font-brand-body); font-size: 16px; line-height: 26px; font-weight: 400; }
+.hiha-caption { font-family: var(--font-brand-body); font-size: 13px; line-height: 18px; font-weight: 400; }
+.hiha-label { font-family: var(--font-brand-body); font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }

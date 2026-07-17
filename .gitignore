@@ -106,3 +106,7 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk 
+# Clés privées Sparkle — ne JAMAIS versionner
+sparkle_private_key*
+*.pem
+*ed25519*

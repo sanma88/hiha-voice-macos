@@ -1,13 +1,16 @@
 # Notarytool — aide-mémoire Hi-Ha Voice
 
+> Les placeholders `<APPLE_ID>` et `<TEAM_ID>` sont documentés avec leurs
+> valeurs réelles dans `notarytool.local.md` (non versionné, voir `.gitignore`).
+
 ## Identifiants du compte (équipe Pixinko)
 
 | Champ | Valeur |
 |---|---|
-| Apple ID | `mariano@hi-ha.be` |
-| Team ID | `85RMV67598` |
+| Apple ID | `<APPLE_ID>` |
+| Team ID | `<TEAM_ID>` |
 | Team Name | Pixinko |
-| Signing identity | `Developer ID Application: Pixinko (85RMV67598)` |
+| Signing identity | `Developer ID Application: Pixinko (<TEAM_ID>)` |
 | Profil keychain notarytool | `hihavoice-notary` (nom attendu par le Makefile) |
 | Mot de passe spécifique app | à générer sur https://appleid.apple.com → *Sign-In and Security* → *App-Specific Passwords* |
 
@@ -43,8 +46,8 @@ Format : `xxxx-xxxx-xxxx-xxxx`.
 
 ```bash
 xcrun notarytool store-credentials hihavoice-notary \
-  --apple-id "mariano@hi-ha.be" \
-  --team-id "85RMV67598" \
+  --apple-id "<APPLE_ID>" \
+  --team-id "<TEAM_ID>" \
   --password "xxxx-xxxx-xxxx-xxxx"
 ```
 
@@ -151,5 +154,5 @@ spctl -a -vvv -t install "build/HiHaVoice.dmg"
 ### Bon à savoir
 
 - Apple Developer Portal et App Store Connect n'affichent **pas** le statut des notarisations Developer ID (contrairement aux apps MAS). Seul `notarytool` voit l'historique.
-- Apple envoie un email à `mariano@hi-ha.be` à chaque sortie de `In Progress`. Patient → pas besoin de poller.
+- Apple envoie un email à `<APPLE_ID>` à chaque sortie de `In Progress`. Patient → pas besoin de poller.
 - `--deep` est déprécié pour la signature depuis 2022. À utiliser **uniquement** pour `codesign --verify`, jamais pour signer. Le Makefile signe correctement (bottom-up via `xcodebuild archive`).

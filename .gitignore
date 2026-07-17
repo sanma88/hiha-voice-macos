@@ -36,6 +36,9 @@ build/
 # Claude Code (config & session locale)
 .claude/
 
+# Identifiants locaux de notarisation (valeurs réelles des placeholders)
+notarytool.local.md
+
 # CocoaPods
 #
 # We recommend against adding the Pods directory to your .gitignore. However

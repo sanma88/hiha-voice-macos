@@ -42,13 +42,18 @@ L'app installée se met à jour via Sparkle (`https://hi-ha.be/voice/appcast.xml
 
 - [whisper.cpp](https://github.com/ggerganov/whisper.cpp) — inférence Whisper haute performance
 - [FluidAudio](https://github.com/FluidInference/FluidAudio) — implémentation du modèle Parakeet
+- [LLMkit](https://github.com/sanma88/LLMkit) — communication avec les fournisseurs IA
 - [Sparkle](https://github.com/sparkle-project/Sparkle) — mises à jour automatiques
 - [KeyboardShortcuts](https://github.com/sindresorhus/KeyboardShortcuts) — raccourcis clavier personnalisables
-- [LaunchAtLogin](https://github.com/sindresorhus/LaunchAtLogin) — lancement à la connexion
-- [MediaRemoteAdapter](https://github.com/ejbills/mediaremote-adapter) — contrôle de la lecture média pendant l'enregistrement
-- [Zip](https://github.com/marmelroy/Zip) — compression/décompression
+- [LaunchAtLogin-Modern](https://github.com/sindresorhus/LaunchAtLogin-Modern) — lancement à la connexion
+- [MediaRemoteAdapter](https://github.com/sanma88/mediaremote-adapter) — contrôle de la lecture média pendant l'enregistrement
+- [AXSwift](https://github.com/tisfeng/AXSwift) — API d'accessibilité macOS
+- [KeySender](https://github.com/jordanbaird/KeySender) — envoi d'événements clavier
 - [SelectedTextKit](https://github.com/tisfeng/SelectedTextKit) — récupération du texte sélectionné
 - [Swift Atomics](https://github.com/apple/swift-atomics) — opérations atomiques thread-safe
+- [Zip](https://github.com/marmelroy/Zip) — compression/décompression
+
+Les licences de l'ensemble des composants embarqués (y compris la police Inter et le modèle Silero VAD) sont détaillées dans [THIRD-PARTY-LICENSES.md](THIRD-PARTY-LICENSES.md).
 
 ## Licence
 

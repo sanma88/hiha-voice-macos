@@ -1,16 +1,33 @@
-<?xml version="1.0" standalone="yes"?>
-<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Appcast Sparkle de Hi-Ha Voice. URL canonique : https://hi-ha.be/app/voice/appcast.xml
+     (la SUFeedURL historique https://hi-ha.be/voice/appcast.xml redirige en 301 ici).
+     Publication d'une nouvelle version : voir docs/app-voice/RELEASE-PROCESS.md -->
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
     <channel>
         <title>Hi-Ha Voice</title>
-        <description>Flux de mises à jour pour Hi-Ha Voice</description>
+        <link>https://hi-ha.be/app/voice</link>
+        <description>Mises à jour de Hi-Ha Voice</description>
         <language>fr</language>
-        <!--
-            Quand tu publies une nouvelle version :
-            1. Build + sign + notarize + staple + DMG
-            2. Upload le DMG sur hi-ha.be/voice/HiHaVoice-X.Y.dmg
-            3. Génère une signature Sparkle :
-                 ~/Library/Developer/Xcode/DerivedData/.../SourcePackages/artifacts/sparkle/Sparkle/bin/sign_update /path/to/HiHaVoice-X.Y.dmg
-            4. Ajoute un <item> en tête avec version + edSignature + length
-        -->
+        <item>
+            <title>Version 2.0.1</title>
+            <pubDate>Sat, 18 Jul 2026 01:58:52 +0200</pubDate>
+            <sparkle:version>201</sparkle:version>
+            <sparkle:shortVersionString>2.0.1</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.4</sparkle:minimumSystemVersion>
+            <description><![CDATA[
+                <h2>Hi-Ha Voice 2.0.1</h2>
+                <ul>
+                    <li>Nouvelle identité visuelle hi-ha.be : logo, icône, palette graphite &amp; lilas</li>
+                    <li>Thème clair / sombre / système intégré à l'app</li>
+                    <li>Dépendances consolidées et épinglées</li>
+                    <li>Fiabilisation des mises à jour automatiques</li>
+                </ul>
+            ]]></description>
+            <enclosure
+                url="https://hi-ha.be/app/voice/HiHaVoice-2.0.1.dmg"
+                length="14670421"
+                type="application/octet-stream"
+                sparkle:edSignature="O3ujX6MH2mGdFzlp7+e88A9+flocbFGnS8dJblZsAAh5fvtOTMWdKb/9QrVcnvwJ0HiSOnXDoj6oZDAUmOcuDw==" />
+        </item>
     </channel>
 </rss>

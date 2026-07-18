@@ -103,3 +103,7 @@ Context-aware mode that detects the active app/URL and automatically applies pre
 ## Contributing
 
 The project is **not currently accepting pull requests**. Contributions are limited to bug reports and feature suggestions via GitHub issues.
+
+## Releases
+
+La procédure canonique (bump de version, `make release`, clé Sparkle, appcast, publication sur hi-ha.be, vérifications) est dans **RELEASING.md** — la suivre à la lettre. La clé privée Sparkle vit dans le trousseau du Mac de build, jamais dans un fichier. Pousser ce repo sur ses DEUX remotes : `hiha` (GitLab) et `github-macos` (mirror public).
